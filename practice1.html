@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Writing - Lesson 1 | Jude's Chinese Tuition</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .practice-card { 
+            background: #f8f9fa; 
+            border-radius: 15px; 
+            padding: 2rem; 
+            border: 2px solid #e9ecef;
+        }
+        .hint-box { 
+            margin-bottom: 2rem; 
+            text-align: center;
+            padding: 1.5rem;
+            background: #e3f2fd;
+            border-radius: 10px;
+        }
+        .hint-box strong {
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        .english-word {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+        .input-area { 
+            display: flex; 
+            gap: 1rem; 
+            margin: 2rem 0; 
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .input-area input { 
+            flex: 1; 
+            padding: 1rem; 
+            border: 3px solid #ddd; 
+            border-radius: 10px; 
+            font-size: 1.8rem; 
+            min-width: 250px;
+            text-align: center;
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+        }
+        .input-area button { 
+            padding: 1rem 2rem; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 120px;
+        }
+        .input-area button:hover {
+            background: #5a67d8;
+        }
+        .audio-btn { 
+            background: #ff6b6b; 
+            color: white; 
+            border: none; 
+            padding: 1rem 2rem; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            margin: 1rem auto;
+            display: block;
+        }
+        .audio-btn:hover {
+            background: #ff5252;
+        }
+        .feedback { 
+            margin-top: 2rem; 
+            padding: 1rem; 
+            border-radius: 10px; 
+            display: none;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .correct { 
+            background: #d4edda; 
+            color: #155724; 
+            display: block; 
+            border: 2px solid #c3e6cb;
+        }
+        .incorrect { 
+            background: #f8d7da; 
+            color: #721c24; 
+            display: block;
+            border: 2px solid #f5c6cb;
+        }
+        .progress {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .nav-links {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✍️ Writing Practice: Family 家人</h1>
+        
+        <div class="practice-card">
+            <div class="hint-box">
+                <strong>Write the Chinese character for:</strong>
+                <div class="english-word" id="currentEnglish">father</div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="audio-btn" onclick="playPracticeWord()">
+                    🔊 Listen to Pronunciation
+                </button>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="writingInput" placeholder="Type character here..." autofocus>
+                <button onclick="checkWriting()">Check</button>
+            </div>
+            
+            <div class="progress">
+                Word <span id="currentWordNumber">1</span> of <span id="totalWords">4</span>
+            </div>
+            
+            <div id="feedback" class="feedback"></div>
+            
+            <div class="nav-links">
+                <a href="lesson1.html" target="_blank">📚 Back to Lesson 1</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vocabulary list
+        const vocabWords = [
+            { chinese: "爸爸", pinyin: "bà ba", english: "father" },
+            { chinese: "妈妈", pinyin: "mā ma", english: "mother" },
+            { chinese: "儿子", pinyin: "ér zi", english: "son" },
+            { chinese: "女儿", pinyin: "nǚ ér", english: "daughter" }
+        ];
+
+        let currentWordIndex = 0;
+
+        function updatePracticeDisplay() {
+            const currentWord = vocabWords[currentWordIndex];
+            document.getElementById('currentEnglish').textContent = currentWord.english;
+            document.getElementById('currentWordNumber').textContent = currentWordIndex + 1;
+            document.getElementById('totalWords').textContent = vocabWords.length;
+        }
+
+        function playPracticeWord() {
+            const word = vocabWords[currentWordIndex].chinese;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.7;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function checkWriting() {
+            const input = document.getElementById('writingInput').value.trim();
+            const correct = vocabWords[currentWordIndex].chinese;
+            const feedback = document.getElementById('feedback');
+            
+            if (input === correct) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '✓ Correct! Well done! 🎉';
+                
+                if (currentWordIndex < vocabWords.length - 1) {
+                    currentWordIndex++;
+                    document.getElementById('writingInput').value = '';
+                    document.getElementById('writingInput').focus();
+                } else {
+                    feedback.innerHTML = '🎉 Congratulations! You completed all words! 🏆';
+                    document.getElementById('writingInput').disabled = true;
+                }
+                
+                updatePracticeDisplay();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `✗ Try again. Listen to the pronunciation and try writing it.`;
+                document.getElementById('writingInput').focus();
+            }
+        }
+
+        updatePracticeDisplay();
+
+        document.getElementById('writingInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkWriting();
+            }
+        });
+
+        document.getElementById('writingInput').addEventListener('input', function() {
+            document.getElementById('feedback').className = 'feedback';
+        });
+    </script>
+</body>
+</html>
