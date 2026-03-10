@@ -3,34 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jude's Chinese Tuition - P1-P6 Singapore</title>
+    <title>Jude's Chinese Tuition - Home</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #f5f5f5; 
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover {
+            background: #34495e;
+        }
+        
+        /* Hero Section */
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 100px 20px;
         }
-        .container {
-            max-width: 800px;
-            padding: 2rem;
-        }
-        h1 {
+        .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-        p {
+        .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
         }
-        .lesson-link {
+        .cta-button {
             display: inline-block;
             background: #ff6b6b;
             color: white;
@@ -38,20 +74,169 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.2rem;
             transition: background 0.3s;
         }
-        .lesson-link:hover {
+        .cta-button:hover {
             background: #ff5252;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Features */
+        .features {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .features h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .features p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* MOE Badge */
+        .moe-badge {
+            background: #f1c40f;
+            padding: 2rem;
+            text-align: center;
+        }
+        .badge-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #2c3e50;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .link-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: transform 0.3s;
+        }
+        .link-card:hover {
+            transform: translateY(-5px);
+        }
+        .link-card h3 {
+            margin: 1rem 0;
+            color: #667eea;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
+        <nav>
+            <div class="logo">📚 Jude's Chinese</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="p1.html">P1</a></li>
+                <li><a href="p2.html">P2</a></li>
+                <li><a href="p3.html">P3</a></li>
+                <li><a href="p4.html">P4</a></li>
+                <li><a href="p5.html">P5</a></li>
+                <li><a href="p6.html">P6</a></li>
+                <li><a href="overview.html">Overview</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
         <h1>🇸🇬 Jude's Chinese Tuition</h1>
         <p>P1-P6 • Following Singapore MOE Syllabus</p>
-        <p>Start learning with your first lesson:</p>
-        <a href="lesson1.html" class="lesson-link">📚 Lesson 1: My Family 我的家人</a>
+        <a href="p1.html" class="cta-button">Start Learning →</a>
+    </section>
+
+    <div class="container">
+        <div class="features">
+            <h2>Welcome, Jude! 👋</h2>
+            <p>Your personal Chinese learning journey follows the Singapore MOE syllabus from Primary 1 to Primary 6.</p>
+        </div>
+
+        <div class="moe-badge">
+            <div class="badge-container">
+                <span class="badge">📚 MOE-Aligned</span>
+                <span class="badge">🇸🇬 Singapore Syllabus</span>
+                <span class="badge">🎯 P1-P6</span>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <a href="dashboard.html" class="link-card">
+                <div style="font-size: 3rem;">📊</div>
+                <h3>Your Dashboard</h3>
+                <p>Track your progress, see your scores, and review weak words</p>
+            </a>
+            
+            <a href="p1.html" class="link-card">
+                <div style="font-size: 3rem;">📚</div>
+                <h3>Primary 1</h3>
+                <p>Start with family, school, and daily life vocabulary</p>
+            </a>
+            
+            <a href="practice1.html" class="link-card">
+                <div style="font-size: 3rem;">✍️</div>
+                <h3>Writing Practice</h3>
+                <p>Practice writing with Apple Pencil in guided boxes</p>
+            </a>
+        </div>
     </div>
+
+    <footer>
+        <p>© 2024 Jude's Chinese Learning Journey. Keep practicing! 🇸🇬</p>
+    </footer>
 </body>
 </html>
