@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1 - Family | Jude's Chinese Tuition</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .vocab-card { background: white; border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 2rem; }
+        .vocab-image { width: 80px; height: 80px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        .chinese { font-size: 2rem; font-weight: bold; color: #2c3e50; }
+        .pinyin { font-size: 1.2rem; color: #666; }
+        .english { font-size: 1.1rem; color: #27ae60; }
+        .audio-btn { background: #ff6b6b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-left: 1rem; }
+        .practice-area { background: #f8f9fa; border-radius: 10px; padding: 2rem; margin-top: 2rem; }
+        .writing-practice { display: flex; gap: 1rem; margin: 1rem 0; }
+        .writing-practice input { flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1.2rem; }
+        .writing-practice button { padding: 0.8rem 2rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .feedback { margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none; }
+        .correct { background: #d4edda; color: #155724; display: block; }
+        .incorrect { background: #f8d7da; color: #721c24; display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lesson 1: My Family 我的家人</h1>
+        
+        <div class="vocab-card">
+            <div class="vocab-image">👨</div>
+            <div class="vocab-details">
+                <div class="chinese">爸爸</div>
+                <div class="pinyin">bà ba</div>
+                <div class="english">father / dad</div>
+                <button class="audio-btn" onclick="playAudio('爸爸')">🔊 Play</button>
+            </div>
+        </div>
 
+        <div class="vocab-card">
+            <div class="vocab-image">👩</div>
+            <div class="vocab-details">
+                <div class="chinese">妈妈</div>
+                <div class="pinyin">mā ma</div>
+                <div class="english">mother / mom</div>
+                <button class="audio-btn" onclick="playAudio('妈妈')">🔊 Play</button>
+            </div>
+        </div>
+
+        <div class="vocab-card">
+            <div class="vocab-image">👦</div>
+            <div class="vocab-details">
+                <div class="chinese">儿子</div>
+                <div class="pinyin">ér zi</div>
+                <div class="english">son</div>
+                <button class="audio-btn" onclick="playAudio('儿子')">🔊 Play</button>
+            </div>
+        </div>
+
+        <div class="vocab-card">
+            <div class="vocab-image">👧</div>
+            <div class="vocab-details">
+                <div class="chinese">女儿</div>
+                <div class="pinyin">nǚ ér</div>
+                <div class="english">daughter</div>
+                <button class="audio-btn" onclick="playAudio('女儿')">🔊 Play</button>
+            </div>
+        </div>
+
+        <div class="practice-area">
+            <h2>Practice Writing</h2>
+            <p>Listen to the word, then write the Chinese character:</p>
+            <div class="writing-practice">
+                <input type="text" id="writingInput" placeholder="Type here...">
+                <button onclick="checkWriting()">Check</button>
+                <button class="audio-btn" onclick="playPracticeWord()">🔊 Listen</button>
+            </div>
+            <div id="feedback" class="feedback"></div>
+            <p>Current word: <span id="currentPracticeWord">爸爸</span></p>
+        </div>
+    </div>
+
+    <script>
+        const vocabWords = [
+            { chinese: "爸爸", pinyin: "bà ba", english: "father" },
+            { chinese: "妈妈", pinyin: "mā ma", english: "mother" },
+            { chinese: "儿子", pinyin: "ér zi", english: "son" },
+            { chinese: "女儿", pinyin: "nǚ ér", english: "daughter" }
+        ];
+        
+        let currentWordIndex = 0;
+        
+        function playAudio(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        function playPracticeWord() {
+            playAudio(vocabWords[currentWordIndex].chinese);
+        }
+        
+        function checkWriting() {
+            const input = document.getElementById('writingInput').value.trim();
+            const correct = vocabWords[currentWordIndex].chinese;
+            const feedback = document.getElementById('feedback');
+            
+            if (input === correct) {
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '✓ Correct! Well done!';
+                currentWordIndex = (currentWordIndex + 1) % vocabWords.length;
+                document.getElementById('currentPracticeWord').textContent = vocabWords[currentWordIndex].chinese;
+                document.getElementById('writingInput').value = '';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.innerHTML = `✗ Try again. The correct answer is: ${correct}`;
+            }
+        }
+    </script>
+</body>
+</html>
