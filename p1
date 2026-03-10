@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primary 1 | Jude's Chinese</title>
+    <style>
+        /* Copy the same styles from index.html for consistency */
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f5f5f5; }
+        header { background: #2c3e50; color: white; padding: 1rem 0; }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 20px; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; gap: 1rem; }
+        nav ul li a { color: white; text-decoration: none; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; }
+        .lesson-card { background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn { background: #667eea; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px; }
+        footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📚 Jude's Chinese</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="p1.html">P1</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>📘 Primary 1 - Building Foundation</h1>
+        <p>Click on any lesson to start learning.</p>
+
+        <div class="lesson-card">
+            <h2>Lesson 1: Family 家人</h2>
+            <p>爸爸, 妈妈, 儿子, 女儿</p>
+            <a href="lesson1.html" class="btn">Start Lesson →</a>
+            <a href="practice1.html" class="btn" style="background: #27ae60;">Practice Writing</a>
+        </div>
+
+        <div class="lesson-card" style="opacity: 0.7;">
+            <h2>Lesson 2: School 学校 (Coming Soon)</h2>
+            <p>老师, 同学, 教室, 书本</p>
+            <button disabled style="padding: 0.5rem 1rem;">Coming Soon</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Jude's Chinese Learning Journey</p>
+    </footer>
+</body>
+</html>
