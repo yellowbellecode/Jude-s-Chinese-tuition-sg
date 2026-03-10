@@ -5,26 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson 1 - Family | Jude's Chinese Tuition</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .vocab-card { background: white; border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 2rem; }
-        .vocab-image { width: 80px; height: 80px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-        .chinese { font-size: 2rem; font-weight: bold; color: #2c3e50; }
-        .pinyin { font-size: 1.2rem; color: #666; }
-        .english { font-size: 1.1rem; color: #27ae60; }
-        .audio-btn { background: #ff6b6b; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; margin-left: 1rem; }
-        .practice-area { background: #f8f9fa; border-radius: 10px; padding: 2rem; margin-top: 2rem; }
-        .writing-practice { display: flex; gap: 1rem; margin: 1rem 0; }
-        .writing-practice input { flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 5px; font-size: 1.2rem; }
-        .writing-practice button { padding: 0.8rem 2rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        .feedback { margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none; }
-        .correct { background: #d4edda; color: #155724; display: block; }
-        .incorrect { background: #f8d7da; color: #721c24; display: block; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: #f5f5f5; 
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .vocab-card { 
+            background: white; 
+            border-radius: 10px; 
+            padding: 1.5rem; 
+            margin-bottom: 1rem; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            display: flex; 
+            align-items: center; 
+            gap: 2rem; 
+        }
+        .vocab-image { 
+            width: 80px; 
+            height: 80px; 
+            background: #f0f0f0; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 2rem; 
+        }
+        .vocab-details { 
+            flex: 1; 
+        }
+        .chinese { 
+            font-size: 2rem; 
+            font-weight: bold; 
+            color: #2c3e50; 
+        }
+        .pinyin { 
+            font-size: 1.2rem; 
+            color: #666; 
+            margin: 0.5rem 0; 
+        }
+        .english { 
+            font-size: 1.1rem; 
+            color: #27ae60; 
+        }
+        .audio-btn { 
+            background: #ff6b6b; 
+            color: white; 
+            border: none; 
+            padding: 0.5rem 1rem; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-left: 1rem;
+            font-size: 1rem;
+        }
+        .audio-btn:hover {
+            background: #ff5252;
+        }
+        .practice-area { 
+            background: #f8f9fa; 
+            border-radius: 10px; 
+            padding: 2rem; 
+            margin-top: 2rem; 
+        }
+        .current-word-hint { 
+            margin-bottom: 1rem; 
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        .writing-practice { 
+            display: flex; 
+            gap: 1rem; 
+            margin: 1rem 0; 
+            flex-wrap: wrap;
+        }
+        .writing-practice input { 
+            flex: 1; 
+            padding: 0.8rem; 
+            border: 2px solid #ddd; 
+            border-radius: 5px; 
+            font-size: 1.2rem; 
+            min-width: 200px;
+        }
+        .writing-practice button { 
+            padding: 0.8rem 2rem; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 1rem;
+        }
+        .writing-practice button:hover {
+            background: #5a67d8;
+        }
+        .feedback { 
+            margin-top: 1rem; 
+            padding: 1rem; 
+            border-radius: 5px; 
+            display: none; 
+        }
+        .correct { 
+            background: #d4edda; 
+            color: #155724; 
+            display: block; 
+        }
+        .incorrect { 
+            background: #f8d7da; 
+            color: #721c24; 
+            display: block; 
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">Jude's Chinese Tuition</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="curriculum.html">Curriculum</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
-        <h1>Lesson 1: My Family 我的家人</h1>
+        <h1>Lesson 1: My Family 我的家人 (wǒ de jiā rén)</h1>
         
         <div class="vocab-card">
             <div class="vocab-image">👨</div>
@@ -69,37 +218,55 @@
         <div class="practice-area">
             <h2>Practice Writing</h2>
             <p>Listen to the word, then write the Chinese character:</p>
-            <div class="writing-practice">
-                <input type="text" id="writingInput" placeholder="Type here...">
-                <button onclick="checkWriting()">Check</button>
-                <button class="audio-btn" onclick="playPracticeWord()">🔊 Listen</button>
+            
+            <div class="current-word-hint">
+                <strong>Meaning:</strong> <span id="currentEnglish">father</span>
             </div>
+            
+            <div class="writing-practice">
+                <input type="text" id="writingInput" placeholder="Type the Chinese character here...">
+                <button onclick="checkWriting()">Check Answer</button>
+                <button class="audio-btn" onclick="playPracticeWord()">🔊 Listen to Word</button>
+            </div>
+            
             <div id="feedback" class="feedback"></div>
-            <p>Current word: <span id="currentPracticeWord">爸爸</span></p>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2024 Jude's Chinese Tuition. All rights reserved.</p>
+    </footer>
+
     <script>
+        // Vocabulary list
         const vocabWords = [
             { chinese: "爸爸", pinyin: "bà ba", english: "father" },
             { chinese: "妈妈", pinyin: "mā ma", english: "mother" },
             { chinese: "儿子", pinyin: "ér zi", english: "son" },
             { chinese: "女儿", pinyin: "nǚ ér", english: "daughter" }
         ];
-        
+
         let currentWordIndex = 0;
-        
+
+        // Function to update the display with current word's English meaning
+        function updatePracticeDisplay() {
+            const currentWord = vocabWords[currentWordIndex];
+            document.getElementById('currentEnglish').textContent = currentWord.english;
+        }
+
+        // Audio playback using Web Speech API
         function playAudio(text) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN';
             utterance.rate = 0.8;
             window.speechSynthesis.speak(utterance);
         }
-        
+
         function playPracticeWord() {
-            playAudio(vocabWords[currentWordIndex].chinese);
+            const word = vocabWords[currentWordIndex].chinese;
+            playAudio(word);
         }
-        
+
         function checkWriting() {
             const input = document.getElementById('writingInput').value.trim();
             const correct = vocabWords[currentWordIndex].chinese;
@@ -108,14 +275,26 @@
             if (input === correct) {
                 feedback.className = 'feedback correct';
                 feedback.innerHTML = '✓ Correct! Well done!';
+                
+                // Move to next word after correct answer
                 currentWordIndex = (currentWordIndex + 1) % vocabWords.length;
-                document.getElementById('currentPracticeWord').textContent = vocabWords[currentWordIndex].chinese;
+                updatePracticeDisplay();
                 document.getElementById('writingInput').value = '';
             } else {
                 feedback.className = 'feedback incorrect';
                 feedback.innerHTML = `✗ Try again. The correct answer is: ${correct}`;
             }
         }
+
+        // Initialize the display when page loads
+        updatePracticeDisplay();
+
+        // Allow Enter key to submit answer
+        document.getElementById('writingInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkWriting();
+            }
+        });
     </script>
 </body>
 </html>
