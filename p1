@@ -5,17 +5,266 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primary 1 | Jude's Chinese</title>
     <style>
-        /* Copy the same styles from index.html for consistency */
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f5f5f5; }
-        header { background: #2c3e50; color: white; padding: 1rem 0; }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; padding: 0 20px; }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        nav ul { display: flex; list-style: none; gap: 1rem; }
-        nav ul li a { color: white; text-decoration: none; }
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; }
-        .lesson-card { background: white; padding: 1.5rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .btn { background: #667eea; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px; }
-        footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f0f2f5; 
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover {
+            background: #34495e;
+        }
+        nav ul li a.active {
+            background: #667eea;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        /* Level Header */
+        .level-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        .level-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .level-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .progress-summary {
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        /* Lessons Grid */
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+        }
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 5px solid;
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+        .lesson-card.completed { border-left-color: #27ae60; }
+        .lesson-card.in-progress { border-left-color: #f39c12; }
+        .lesson-card.not-started { border-left-color: #95a5a6; }
+        
+        .lesson-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .lesson-header h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+        }
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-badge.completed { background: #d4edda; color: #155724; }
+        .status-badge.in-progress { background: #fff3cd; color: #856404; }
+        .status-badge.not-started { background: #e2e3e5; color: #383d41; }
+        
+        .vocab-preview {
+            margin: 1rem 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .vocab-preview span {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            margin: 0.2rem;
+            border-radius: 5px;
+        }
+        
+        .lesson-progress {
+            margin: 1rem 0;
+        }
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        .lesson-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #219a52;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        .btn.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        /* Tests Section */
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .test-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        .action-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -25,31 +274,162 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="p1.html">P1</a></li>
+                <li><a href="p1.html" class="active">P1</a></li>
+                <li><a href="p2.html">P2</a></li>
+                <li><a href="p3.html">P3</a></li>
+                <li><a href="p4.html">P4</a></li>
+                <li><a href="p5.html">P5</a></li>
+                <li><a href="p6.html">P6</a></li>
+                <li><a href="overview.html">Overview</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
-        <h1>📘 Primary 1 - Building Foundation</h1>
-        <p>Click on any lesson to start learning.</p>
-
-        <div class="lesson-card">
-            <h2>Lesson 1: Family 家人</h2>
-            <p>爸爸, 妈妈, 儿子, 女儿</p>
-            <a href="lesson1.html" class="btn">Start Lesson →</a>
-            <a href="practice1.html" class="btn" style="background: #27ae60;">Practice Writing</a>
+        <!-- Level Header -->
+        <div class="level-header">
+            <h1>📘 Primary 1 - Building Foundation</h1>
+            <p>Basic vocabulary, simple sentences, and everyday expressions following MOE syllabus</p>
+            <div class="progress-summary">
+                <strong>Overall Progress:</strong> 25% complete (1 of 4 lessons done)
+            </div>
         </div>
 
-        <div class="lesson-card" style="opacity: 0.7;">
-            <h2>Lesson 2: School 学校 (Coming Soon)</h2>
-            <p>老师, 同学, 教室, 书本</p>
-            <button disabled style="padding: 0.5rem 1rem;">Coming Soon</button>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="lesson1.html" class="action-btn">📚 Continue Lesson 1</a>
+            <a href="practice1.html" class="action-btn">✍️ Daily Practice</a>
+            <a href="#" class="action-btn">📝 Take Level Test</a>
+        </div>
+
+        <!-- Lessons Section -->
+        <h2 class="section-title">📖 Lessons</h2>
+        <div class="lessons-grid">
+            <!-- Lesson 1 - Completed -->
+            <div class="lesson-card completed">
+                <div class="lesson-header">
+                    <h3>Lesson 1: My Family 我的家人</h3>
+                    <span class="status-badge completed">✅ Completed</span>
+                </div>
+                <div class="vocab-preview">
+                    <span>爸爸</span> <span>妈妈</span> <span>儿子</span> <span>女儿</span>
+                </div>
+                <div class="lesson-progress">
+                    <div class="progress-text">
+                        <span>Mastered: 4/4 words</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="lesson1.html" class="btn btn-outline">🔄 Review</a>
+                    <a href="practice1.html" class="btn btn-success">✍️ Practice</a>
+                    <a href="#" class="btn btn-primary">📝 Test</a>
+                </div>
+            </div>
+
+            <!-- Lesson 2 - In Progress -->
+            <div class="lesson-card in-progress">
+                <div class="lesson-header">
+                    <h3>Lesson 2: School 学校</h3>
+                    <span class="status-badge in-progress">🟡 In Progress</span>
+                </div>
+                <div class="vocab-preview">
+                    <span>老师</span> <span>同学</span> <span>教室</span> <span>书本</span>
+                </div>
+                <div class="lesson-progress">
+                    <div class="progress-text">
+                        <span>Mastered: 2/4 words</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="#" class="btn btn-primary">▶️ Continue</a>
+                    <a href="#" class="btn btn-outline">✍️ Practice</a>
+                </div>
+            </div>
+
+            <!-- Lesson 3 - Not Started -->
+            <div class="lesson-card not-started">
+                <div class="lesson-header">
+                    <h3>Lesson 3: Numbers 数字</h3>
+                    <span class="status-badge not-started">⭕ Not Started</span>
+                </div>
+                <div class="vocab-preview">
+                    <span>一</span> <span>二</span> <span>三</span> <span>四</span> <span>五</span>
+                </div>
+                <div class="lesson-progress">
+                    <div class="progress-text">
+                        <span>Mastered: 0/5 words</span>
+                        <span>0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="#" class="btn btn-primary">▶️ Start Lesson</a>
+                </div>
+            </div>
+
+            <!-- Lesson 4 - Not Started -->
+            <div class="lesson-card not-started">
+                <div class="lesson-header">
+                    <h3>Lesson 4: Colors 颜色</h3>
+                    <span class="status-badge not-started">⭕ Not Started</span>
+                </div>
+                <div class="vocab-preview">
+                    <span>红色</span> <span>蓝色</span> <span>黄色</span> <span>绿色</span>
+                </div>
+                <div class="lesson-progress">
+                    <div class="progress-text">
+                        <span>Mastered: 0/4 words</span>
+                        <span>0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="#" class="btn btn-primary">▶️ Start Lesson</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tests Section -->
+        <h2 class="section-title">📝 Lesson Tests</h2>
+        <div class="tests-grid">
+            <div class="test-card">
+                <h3>Lesson 1 Test: Family</h3>
+                <div class="test-score">85%</div>
+                <p>Last taken: Today</p>
+                <a href="#" class="btn btn-outline">Retake Test</a>
+            </div>
+            <div class="test-card">
+                <h3>Lesson 2 Test: School</h3>
+                <div class="test-score">—</div>
+                <p>Not taken yet</p>
+                <a href="#" class="btn btn-primary">Take Test</a>
+            </div>
+        </div>
+
+        <!-- Words to Review -->
+        <div style="background: white; border-radius: 15px; padding: 1.5rem; margin: 2rem 0;">
+            <h3>🔤 Words to Review</h3>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                <span style="background: #f8d7da; padding: 0.5rem 1rem; border-radius: 20px;">老师 <span style="color: #721c24;">(2 mistakes)</span></span>
+                <span style="background: #fff3cd; padding: 0.5rem 1rem; border-radius: 20px;">同学 <span style="color: #856404;">(1 mistake)</span></span>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>© 2024 Jude's Chinese Learning Journey</p>
+        <p>© 2024 Jude's Chinese Learning Journey. Following MOE Syllabus.</p>
     </footer>
 </body>
 </html>
